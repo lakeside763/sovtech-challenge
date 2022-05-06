@@ -1,0 +1,9 @@
+{
+  "name": "sovtech-swapi",
+  "version": "1.0.0",
+  "description": "sovtech swapi graphql api",
+  "main": "index.js",
+  "author": "Moses Idowu",
+  "license": "MIT",
+  "private": true
+}
