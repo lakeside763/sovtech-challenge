@@ -1,0 +1,24 @@
+type People {
+  name: String
+  height: String
+  mass: String
+  url: String
+}
+
+type GetPeopleResponseData {
+  count: Int
+  next: String
+  previous: String
+  people: [People]
+}
+
+input GetPeopleInput {
+  url: String
+  page: Int
+  search: String
+}
+
+
+type Query {
+  getPeople(input: GetPeopleInput): GetPeopleResponseData
+}

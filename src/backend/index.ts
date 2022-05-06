@@ -1,3 +1,10 @@
-import { app, port } from './server';
+import { app, port, server } from './server';
 
-app.listen({ port }, () => console.log(`Server ready at http://localhost:${port}`));
+
+const startApolloServer = async () => {
+  await server.start();
+  server.applyMiddleware({ app });
+  app.listen({ port }, () => console.log(`Server ready at http://localhost:${port}`));
+}
+
+startApolloServer();
