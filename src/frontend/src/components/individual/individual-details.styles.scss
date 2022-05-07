@@ -1,0 +1,68 @@
+.outer-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  .bedcrumb {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+
+    span {
+      margin-right: 10px;
+    }
+
+    :first-child {
+      a {
+        color: #fff;
+      }
+    }
+
+    :nth-child(2) {
+      padding-top: 2px;
+    }
+
+    :last-child {
+      color: rgb(189, 186, 186)
+    }
+  }
+
+  .info-wrapper {
+    background-color: #fff;
+    display: flex;
+    padding: 0px 30px;
+    margin-top: 10px;
+    margin-bottom: 80px;
+
+    .avatar {
+      width: 200px;
+      margin-top: 30px;
+      margin-right: 30px;
+
+      img {
+        width: 100%;
+        border-radius: 5px;
+      }
+    }
+
+    .name {
+      margin-top: 50px;
+    }
+
+    .other-info {
+      display: flex;
+      flex-direction: column;
+
+      .info-text {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+
+        :first-child {
+          font-weight: bold;
+          font-size: 12px;
+        }
+      }
+      
+    }
+  }
+}

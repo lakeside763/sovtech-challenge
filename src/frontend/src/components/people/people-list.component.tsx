@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { gql, useQuery } from '@apollo/client';
 import { FiArrowRight } from "react-icons/fi";
 import './people-list.style.scss';
@@ -12,6 +13,10 @@ const GET_PEOPLE_LIST = gql`
       people {
         name
         mass
+        hair_color
+        eye_color
+        gender
+        homeworld
         url
       }
     }
@@ -26,15 +31,22 @@ const Loader = () => {
 
 const PeopleList = () => {
   const [peopleList, setPeopleList] = useState([]);
+  const [count, setCount] = useState();
+  // const [page, setPage] = useState(1);
   const { loading, data } = useQuery(GET_PEOPLE_LIST);
 
   useEffect(() => {
     if (data) {
       console.log(data);
-      const { getPeopleList: { people } } = data;
+      const { getPeopleList: { count, people } } = data;
       setPeopleList(people);
+      setCount(count);
     }
   }, [data]);
+
+  // useEffect(() => {
+  //   setPage(1);
+  // }, [page])
 
   const firstLetter = (text: string) => text.charAt(0)
 
@@ -48,21 +60,24 @@ const PeopleList = () => {
         <Loader />
       ): (
         <Fragment>
-            <div className="count">Showing 10 of 82</div>
+            <div className="count">Showing 10 of {count}</div>
             <div className="people-list">
-            {peopleList && peopleList.map(({ name, mass, url }) => {
+            {peopleList && peopleList.map(({ name, url, gender }) => {
               return (
                 <div key={name} className="individual-details">
                   <div className="first-letter">{firstLetter(name)}</div>
                   <div className="info">
-                    <div className="name">{name}</div>
+                    <div className="name">
+                      <Link to={`/people/1`}>{name}</Link>
+                    </div>
                     <div className="other-info">
-                      <span>height: {mass}</span>
-                      <span>Url: {url}</span>
+                      <span>{gender}</span>
                     </div>
                   </div>
                   <div className="details-icon">
-                    <FiArrowRight />
+                    <Link to={`/people/1`}>
+                      <FiArrowRight />
+                    </Link>
                   </div>
                 </div>
               )
