@@ -1,7 +1,7 @@
 import { Request, RESTDataSource } from 'apollo-datasource-rest';
 import { UserInputError } from 'apollo-server-express';
 import { Maybe } from 'graphql/jsutils/Maybe';
-import { GetPeopleInput } from '../schema/resolver-types'
+import { GetPeopleListInput } from '../schema/resolver-types'
 
 class SwapiDatasource extends RESTDataSource {
   constructor() {
@@ -13,12 +13,30 @@ class SwapiDatasource extends RESTDataSource {
     throw new UserInputError(error.message)
   }
 
-  async getPeople(input: Maybe<GetPeopleInput>) {
-    const { page, search, url } = input || {}; 
+  mapIndividualId(data: any[]) {
+    return data.map(({ url, ...rest }) => {
+      const splitUrl: any[] = url.split('/');
+      const id = splitUrl[splitUrl.length - 2];
+      return {
+        id,
+        ...rest
+      }
+    })
+  }
+
+  async getPeople(input: Maybe<GetPeopleListInput>) {
+    const { page, search } = input || {}; 
     const queryString =  search ? `?search=${search}` : `?page=${page || 1}`;
-    const requestUrl = url ? this.baseURL = url : `people/${queryString}`;
-    const { results, ...rest } = await this.get(requestUrl);
-    return { ...rest, people: results };
+    const { results, ...rest } = await this.get(`people/${queryString}`);
+    return { ...rest, people: this.mapIndividualId(results) };
+  }
+
+  async getIndividual(id: number) {
+    const individual = await this.get(`people/${id}`);
+    if (!individual) {
+      throw new UserInputError("Invalid user id was provided");
+    }
+    return { ...individual, id };
   }
 }
 

@@ -1,24 +1,30 @@
-type People {
+type Individual {
+  id: Int
   name: String
   height: String
   mass: String
+  hair_color: String
+  eye_color: String
+  birth_year: String
+  gender: String
+  homeworld: String
   url: String
 }
 
-type GetPeopleResponseData {
+type GetPeopleListResponseData {
   count: Int
   next: String
   previous: String
-  people: [People]
+  people: [Individual]
 }
 
-input GetPeopleInput {
-  url: String
+input GetPeopleListInput {
   page: Int
   search: String
 }
 
 
 type Query {
-  getPeople(input: GetPeopleInput): GetPeopleResponseData
+  getPeopleList(input: GetPeopleListInput): GetPeopleListResponseData
+  getIndividualById(id: Int!): Individual
 }

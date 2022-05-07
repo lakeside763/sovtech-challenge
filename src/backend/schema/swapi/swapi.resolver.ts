@@ -1,14 +1,21 @@
 import { GraphqlContext } from '../../models/datasources.model';
-import { Resolvers, QueryGetPeopleArgs } from '../resolver-types';
+import { Resolvers, QueryGetPeopleListArgs, QueryGetIndividualByIdArgs } from '../resolver-types';
 
 
 const swapiResolver: Resolvers = {
   Query: {
-    getPeople: async (parent: unknown, { input }: QueryGetPeopleArgs, { dataSources }: GraphqlContext) => {
+    getPeopleList: async (parent: unknown, { input }: QueryGetPeopleListArgs, { dataSources }: GraphqlContext) => {
       try {
         return await dataSources.swapi.getPeople(input);
       } catch (error) {
         return error
+      }
+    },
+    getIndividualById: async (parent: unknown, { id }: QueryGetIndividualByIdArgs, { dataSources }: GraphqlContext) => {
+      try {
+        return await dataSources.swapi.getIndividual(id)
+      } catch (error) {
+        return error;
       }
     }
   }
