@@ -1,6 +1,6 @@
 import React from "react";
 
-const Person = () => {
+const IndividualDetails = () => {
   return (
     <div>
       <h1>Person Component</h1>
@@ -8,4 +8,4 @@ const Person = () => {
   )
 }
 
-export default Person
+export default IndividualDetails

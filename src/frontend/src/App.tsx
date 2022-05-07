@@ -1,15 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom'
-import People from './components/people/people.component';
-import Person from './components/person/person.component';
-import Navigation from './routes/navigation.component';
+import PeopleList from './components/people/people-list.component';
+import IndividualDetails from './components/individual/individual-details.component';
+import Home from './routes/home/home.component';
 
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Navigation />} >
-        <Route index element={<People />} />
-        <Route path='/people/:id' element={<Person />} />
+      <Route path='/' element={<Home />} >
+        <Route index element={<PeopleList />} />
+        <Route path='/people/:id' element={<IndividualDetails />} />
       </Route>
     </Routes>
   );

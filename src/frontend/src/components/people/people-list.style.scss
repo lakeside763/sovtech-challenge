@@ -1,0 +1,91 @@
+.outer-wrapper {
+    display: flex;
+    flex-direction: column;
+
+    .search-wrapper {
+        width: 100%;
+        margin: auto;
+        display: flex;
+
+        input {
+            width: 80%;
+            padding: 20px 30px 15px 30px;
+            font-size: 20px;
+            font-weight: normal;
+            // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+            border: 1px solid transparent;
+        }
+        button {
+            width: 20%;
+            border-radius: 0px;;
+            background-color: #000;
+            color: #fff;
+            border: none;
+            font-size: 18px;
+        }
+    }
+
+    .sub-title {
+        font-size: 18px;
+    }
+
+    .count {
+        display: flex;
+        justify-content: flex-end;
+        color: #fff;
+        font-size: 18px;
+        margin-top: 20px;
+    }
+
+    .people-list {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        margin-bottom: 60px;
+        background-color: #fff;
+        // box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+        .individual-details {
+            display: flex;
+            flex-direction: row;
+            border-bottom: thin solid #f2f2f2;
+            background-color: #fff;
+            padding: 15px 30px 10px 30px;
+
+            .first-letter {
+                width: 30px;
+                height: 30px;
+                padding: 10px;
+                border-radius: 50%;
+                background-color: #ccc;
+                margin-right: 20px;
+                text-align: center;
+                font-size: 24px;
+                font-weight: 500;
+            }
+
+            .info {
+                .name {
+                    display: inline-block;
+                    font-size: 20px;
+                    font-weight: 500;
+                }
+    
+                .other-info {
+                    display: flex;
+                    span {
+                        margin-right: 40px;
+                        margin-top: 5px;
+                        font-size: 14px;
+                    }
+                }
+            }
+
+            .details-icon {
+                margin-left: auto;
+                padding-top: 20px;
+                font-size: 24px;
+            }
+        }
+    }
+}
