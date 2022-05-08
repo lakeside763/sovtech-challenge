@@ -27,14 +27,14 @@ export type GetPeopleListResponseData = {
   count?: Maybe<Scalars['Int']>;
   /** Pagination next link */
   next?: Maybe<Scalars['String']>;
-  /** Array of the collection of an individual */
-  people?: Maybe<Array<Maybe<Individual>>>;
+  /** Array of the collection of an Person */
+  people?: Maybe<Array<Maybe<Person>>>;
   /** Pagination previous link */
   previous?: Maybe<Scalars['String']>;
 };
 
-export type Individual = {
-  __typename?: 'Individual';
+export type Person = {
+  __typename?: 'Person';
   /** Birth year of the person */
   birth_year?: Maybe<Scalars['String']>;
   /** Eye color of the person */
@@ -59,20 +59,20 @@ export type Individual = {
 
 export type Query = {
   __typename?: 'Query';
-  /** A query to fetch the details of person by the person ID */
-  getIndividualById?: Maybe<Individual>;
   /** A query to fetch the list of people optionally by page or search parameter */
   getPeopleList?: Maybe<GetPeopleListResponseData>;
-};
-
-
-export type QueryGetIndividualByIdArgs = {
-  id: Scalars['Int'];
+  /** A query to fetch the details of person by the person ID */
+  getPersonById?: Maybe<Person>;
 };
 
 
 export type QueryGetPeopleListArgs = {
   input?: InputMaybe<GetPeopleListInput>;
+};
+
+
+export type QueryGetPersonByIdArgs = {
+  id: Scalars['Int'];
 };
 
 
@@ -147,8 +147,8 @@ export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   GetPeopleListInput: GetPeopleListInput;
   GetPeopleListResponseData: ResolverTypeWrapper<GetPeopleListResponseData>;
-  Individual: ResolverTypeWrapper<Individual>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
+  Person: ResolverTypeWrapper<Person>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
 };
@@ -158,8 +158,8 @@ export type ResolversParentTypes = {
   Boolean: Scalars['Boolean'];
   GetPeopleListInput: GetPeopleListInput;
   GetPeopleListResponseData: GetPeopleListResponseData;
-  Individual: Individual;
   Int: Scalars['Int'];
+  Person: Person;
   Query: {};
   String: Scalars['String'];
 };
@@ -167,12 +167,12 @@ export type ResolversParentTypes = {
 export type GetPeopleListResponseDataResolvers<ContextType = any, ParentType extends ResolversParentTypes['GetPeopleListResponseData'] = ResolversParentTypes['GetPeopleListResponseData']> = {
   count?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   next?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  people?: Resolver<Maybe<Array<Maybe<ResolversTypes['Individual']>>>, ParentType, ContextType>;
+  people?: Resolver<Maybe<Array<Maybe<ResolversTypes['Person']>>>, ParentType, ContextType>;
   previous?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type IndividualResolvers<ContextType = any, ParentType extends ResolversParentTypes['Individual'] = ResolversParentTypes['Individual']> = {
+export type PersonResolvers<ContextType = any, ParentType extends ResolversParentTypes['Person'] = ResolversParentTypes['Person']> = {
   birth_year?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   eye_color?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   gender?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -187,13 +187,13 @@ export type IndividualResolvers<ContextType = any, ParentType extends ResolversP
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
-  getIndividualById?: Resolver<Maybe<ResolversTypes['Individual']>, ParentType, ContextType, RequireFields<QueryGetIndividualByIdArgs, 'id'>>;
   getPeopleList?: Resolver<Maybe<ResolversTypes['GetPeopleListResponseData']>, ParentType, ContextType, Partial<QueryGetPeopleListArgs>>;
+  getPersonById?: Resolver<Maybe<ResolversTypes['Person']>, ParentType, ContextType, RequireFields<QueryGetPersonByIdArgs, 'id'>>;
 };
 
 export type Resolvers<ContextType = any> = {
   GetPeopleListResponseData?: GetPeopleListResponseDataResolvers<ContextType>;
-  Individual?: IndividualResolvers<ContextType>;
+  Person?: PersonResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
 };
 

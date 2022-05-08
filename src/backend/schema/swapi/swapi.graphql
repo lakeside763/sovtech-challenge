@@ -1,4 +1,4 @@
-type Individual {
+type Person {
   "Unique identity map from the list of the people"
   id: Int
   "Name of the person"
@@ -28,8 +28,8 @@ type GetPeopleListResponseData {
   next: String
   "Pagination previous link"
   previous: String
-  "Array of the collection of an individual"
-  people: [Individual]
+  "Array of the collection of an Person"
+  people: [Person]
 }
 
 input GetPeopleListInput {
@@ -44,5 +44,5 @@ type Query {
   "A query to fetch the list of people optionally by page or search parameter"
   getPeopleList(input: GetPeopleListInput): GetPeopleListResponseData
   "A query to fetch the details of person by the person ID"
-  getIndividualById(id: Int!): Individual
+  getPersonById(id: Int!): Person
 }

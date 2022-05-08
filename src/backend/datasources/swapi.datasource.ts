@@ -13,7 +13,7 @@ class SwapiDatasource extends RESTDataSource {
     throw new UserInputError(error.message)
   }
 
-  mapIndividualId(data: any[]) {
+  mapPeopleId(data: any[]) {
     return data.map(({ url, ...rest }) => {
       const splitUrl: any[] = url.split('/');
       const id = splitUrl[splitUrl.length - 2];
@@ -28,15 +28,15 @@ class SwapiDatasource extends RESTDataSource {
     const { page, search } = input || {}; 
     const queryString =  search ? `?search=${search}` : `?page=${page || 1}`;
     const { results, ...rest } = await this.get(`people/${queryString}`);
-    return { ...rest, people: this.mapIndividualId(results) };
+    return { ...rest, people: this.mapPeopleId(results) };
   }
 
-  async getIndividual(id: number) {
-    const individual = await this.get(`people/${id}`);
-    if (!individual) {
+  async getPerson(id: number) {
+    const person = await this.get(`people/${id}`);
+    if (!person) {
       throw new UserInputError("Invalid user id was provided");
     }
-    return { ...individual, id };
+    return { ...person, id };
   }
 }
 

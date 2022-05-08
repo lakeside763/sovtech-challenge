@@ -1,5 +1,5 @@
 import { GraphqlContext } from '../../models/datasources.model';
-import { Resolvers, QueryGetPeopleListArgs, QueryGetIndividualByIdArgs } from '../resolver-types';
+import { Resolvers, QueryGetPeopleListArgs, QueryGetPersonByIdArgs } from '../resolver-types';
 
 
 const swapiResolver: Resolvers = {
@@ -11,9 +11,9 @@ const swapiResolver: Resolvers = {
         return error
       }
     },
-    getIndividualById: async (parent: unknown, { id }: QueryGetIndividualByIdArgs, { dataSources }: GraphqlContext) => {
+    getPersonById: async (parent: unknown, { id }: QueryGetPersonByIdArgs, { dataSources }: GraphqlContext) => {
       try {
-        return await dataSources.swapi.getIndividual(id)
+        return await dataSources.swapi.getPerson(id)
       } catch (error) {
         return error;
       }
