@@ -15,35 +15,53 @@ export type Scalars = {
 };
 
 export type GetPeopleListInput = {
+  /** Pagination number of set of people list query, is optional */
   page?: InputMaybe<Scalars['Int']>;
+  /** Search from form input for list or specific person, is optional */
   search?: InputMaybe<Scalars['String']>;
 };
 
 export type GetPeopleListResponseData = {
   __typename?: 'GetPeopleListResponseData';
+  /** Total number count of the people list */
   count?: Maybe<Scalars['Int']>;
+  /** Pagination next link */
   next?: Maybe<Scalars['String']>;
+  /** Array of the collection of an individual */
   people?: Maybe<Array<Maybe<Individual>>>;
+  /** Pagination previous link */
   previous?: Maybe<Scalars['String']>;
 };
 
 export type Individual = {
   __typename?: 'Individual';
+  /** Birth year of the person */
   birth_year?: Maybe<Scalars['String']>;
+  /** Eye color of the person */
   eye_color?: Maybe<Scalars['String']>;
+  /** Gender of the person */
   gender?: Maybe<Scalars['String']>;
+  /** Hair color of the person */
   hair_color?: Maybe<Scalars['String']>;
+  /** Height of the person */
   height?: Maybe<Scalars['String']>;
+  /** Homeworld url address of the person */
   homeworld?: Maybe<Scalars['String']>;
+  /** Unique identity map from the list of the people */
   id?: Maybe<Scalars['Int']>;
+  /** Mass of the person */
   mass?: Maybe<Scalars['String']>;
+  /** Name of the person */
   name?: Maybe<Scalars['String']>;
+  /** Url address to the person profile */
   url?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
   __typename?: 'Query';
+  /** A query to fetch the details of person by the person ID */
   getIndividualById?: Maybe<Individual>;
+  /** A query to fetch the list of people optionally by page or search parameter */
   getPeopleList?: Maybe<GetPeopleListResponseData>;
 };
 
