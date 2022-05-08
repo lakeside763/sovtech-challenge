@@ -22,7 +22,7 @@ const PeopleList = () => {
     loading, 
   } = useContext(StarsWarContext);
 
-  
+  const listPerPage = 10;
 
   return (
     <div className="outer-wrapper">
@@ -31,7 +31,7 @@ const PeopleList = () => {
         <Loader />
       ): (
         <Fragment>
-            <div className="count">Showing 10 of {count}</div>
+            <div className="count">{`Showing ${count < listPerPage ? count : listPerPage} of ${count}`}</div>
             <div className="people-list">
             {peopleList && peopleList.map(({ id, name, gender }) => {
               return (
