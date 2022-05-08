@@ -9,6 +9,8 @@ type Person {
   mass: String
   "Hair color of the person"
   hair_color: String
+  "Skin color of the person"
+  skin_color: String
   "Eye color of the person"
   eye_color: String
   "Birth year of the person"

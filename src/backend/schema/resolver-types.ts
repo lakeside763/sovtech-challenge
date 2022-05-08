@@ -53,6 +53,8 @@ export type Person = {
   mass?: Maybe<Scalars['String']>;
   /** Name of the person */
   name?: Maybe<Scalars['String']>;
+  /** Skin color of the person */
+  skin_color?: Maybe<Scalars['String']>;
   /** Url address to the person profile */
   url?: Maybe<Scalars['String']>;
 };
@@ -182,6 +184,7 @@ export type PersonResolvers<ContextType = any, ParentType extends ResolversParen
   id?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   mass?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  skin_color?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   url?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
