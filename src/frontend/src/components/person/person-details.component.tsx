@@ -1,7 +1,7 @@
 import React from "react";
 import { FiChevronRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import './individual-details.styles.scss'
+import './person-details.styles.scss'
 import avatar from '../../assets/avatar.png'
 
 const IndividualDetails = () => {

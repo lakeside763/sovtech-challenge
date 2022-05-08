@@ -6,6 +6,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 import './index.css';
+import StarsWarProvider from './context/stars-wars.contex';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -19,7 +20,9 @@ root.render(
   <React.StrictMode>
     <ApolloProvider client={client}>
       <BrowserRouter>
-        <App />
+        <StarsWarProvider>
+          <App />
+        </StarsWarProvider>
       </BrowserRouter>
     </ApolloProvider>
     

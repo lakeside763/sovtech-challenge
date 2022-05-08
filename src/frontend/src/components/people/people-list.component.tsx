@@ -1,27 +1,9 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useCallback, useContext, useState } from "react";
 import { Link } from "react-router-dom";
-import { gql, useQuery } from '@apollo/client';
 import { FiArrowRight } from "react-icons/fi";
 import './people-list.style.scss';
+import { StarsWarContext } from "../../context/stars-wars.contex";
 
-const GET_PEOPLE_LIST = gql`
-  query GetPeopleList {
-    getPeopleList {
-      count
-      previous
-      next
-      people {
-        name
-        mass
-        hair_color
-        eye_color
-        gender
-        homeworld
-        url
-      }
-    }
-  }
-`;
 
 const Loader = () => {
   return (
@@ -30,31 +12,38 @@ const Loader = () => {
 }
 
 const PeopleList = () => {
-  const [peopleList, setPeopleList] = useState([]);
-  const [count, setCount] = useState();
-  // const [page, setPage] = useState(1);
-  const { loading, data } = useQuery(GET_PEOPLE_LIST);
+  const { 
+    peopleList,
+    count, 
+    firstLetter, 
+    loading, 
+    getPeopleListBySearch
+  } = useContext(StarsWarContext);
 
-  useEffect(() => {
-    if (data) {
-      console.log(data);
-      const { getPeopleList: { count, people } } = data;
-      setPeopleList(people);
-      setCount(count);
-    }
-  }, [data]);
+  const [search, setSearch] = useState('');
 
-  // useEffect(() => {
-  //   setPage(1);
-  // }, [page])
+  const handleFormSearch = (event: any) => {
+    event.preventDefault();
+    getPeopleListBySearch(search);
+  }
 
-  const firstLetter = (text: string) => text.charAt(0)
+  const handleSearchChange = useCallback((event: any) => {
+    event.preventDefault();
+    setSearch(event.target.value)
+  }, []);
 
   return (
     <div className="outer-wrapper">
       <div className="search-wrapper">
-        <input type='text' name='search' placeholder='Search for your stars' />
-        <button>Search</button>
+        <form onSubmit={handleFormSearch}>
+          <div className="search-form">
+            <input type='text' name='search' 
+              placeholder='Search for your stars' 
+              onChange={handleSearchChange}
+            />
+            <button type="submit">Search</button>
+          </div>
+        </form>
       </div>
       {loading ? (
         <Loader />
