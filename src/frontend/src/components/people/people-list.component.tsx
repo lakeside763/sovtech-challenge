@@ -1,15 +1,18 @@
-import React, { Fragment, useCallback, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import { FiArrowRight } from "react-icons/fi";
-import './people-list.style.scss';
+import "./people-list.style.scss";
 import { StarsWarContext } from "../../context/stars-wars.contex";
+import Search from "../search/search.componet";
+import Pagination from "../pagination/pagination.component";
 
 
-const Loader = () => {
+export const Loader = () => {
   return (
     <div style={{ color: '#fff', fontSize: '32px'}}>Loading...</div>
   )
-}
+};
+
 
 const PeopleList = () => {
   const { 
@@ -17,54 +20,33 @@ const PeopleList = () => {
     count, 
     firstLetter, 
     loading, 
-    getPeopleListBySearch
   } = useContext(StarsWarContext);
 
-  const [search, setSearch] = useState('');
-
-  const handleFormSearch = (event: any) => {
-    event.preventDefault();
-    getPeopleListBySearch(search);
-  }
-
-  const handleSearchChange = useCallback((event: any) => {
-    event.preventDefault();
-    setSearch(event.target.value)
-  }, []);
+  
 
   return (
     <div className="outer-wrapper">
-      <div className="search-wrapper">
-        <form onSubmit={handleFormSearch}>
-          <div className="search-form">
-            <input type='text' name='search' 
-              placeholder='Search for your stars' 
-              onChange={handleSearchChange}
-            />
-            <button type="submit">Search</button>
-          </div>
-        </form>
-      </div>
+      <Search />
       {loading ? (
         <Loader />
       ): (
         <Fragment>
             <div className="count">Showing 10 of {count}</div>
             <div className="people-list">
-            {peopleList && peopleList.map(({ name, url, gender }) => {
+            {peopleList && peopleList.map(({ id, name, gender }) => {
               return (
-                <div key={name} className="individual-details">
+                <div key={id} className="person-details">
                   <div className="first-letter">{firstLetter(name)}</div>
                   <div className="info">
                     <div className="name">
-                      <Link to={`/people/1`}>{name}</Link>
+                      <Link to={`/people/${id}`}>{name}</Link>
                     </div>
                     <div className="other-info">
                       <span>{gender}</span>
                     </div>
                   </div>
                   <div className="details-icon">
-                    <Link to={`/people/1`}>
+                    <Link to={`/people/${id}`}>
                       <FiArrowRight />
                     </Link>
                   </div>
@@ -72,6 +54,7 @@ const PeopleList = () => {
               )
             })}
           </div>
+          <Pagination />
         </Fragment>
       )}
     </div>

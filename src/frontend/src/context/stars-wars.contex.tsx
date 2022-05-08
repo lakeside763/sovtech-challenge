@@ -7,6 +7,7 @@ export const StarsWarContext = createContext({
   loading: false,
   firstLetter: (text: string) => text,
   getPeopleListBySearch: (search: string) => search,
+  getPeopleListByPage: (page: number) => page,
 });
 
 

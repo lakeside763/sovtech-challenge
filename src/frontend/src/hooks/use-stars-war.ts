@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
 
-const PERSON_ATTRIBUTE = gql`
-  fragment individualAttribute on Individual {
+export const PERSON_ATTRIBUTE = gql`
+  fragment personAttribute on Person {
+    id
     name
     mass
+    height
     hair_color
     eye_color
+    skin_color
     gender
     homeworld
     url
+    birth_year
   }
 `;
 
@@ -24,7 +28,7 @@ const GET_PEOPLE_LIST = gql`
       previous
       next
       people {
-        ...individualAttribute
+        ...personAttribute
       }
     }
   }
@@ -52,8 +56,7 @@ const useStarsWar = () => {
       setPeopleList(people);
       setCount(count);
     }
-  }, [dataByQueryString])
-
+  }, [dataByQueryString]);
 
 
   const firstLetter = (text: string) => text.charAt(0);
@@ -62,12 +65,17 @@ const useStarsWar = () => {
     getPeopleListRequest({ variables: { search } })
   }
 
+  const getPeopleListByPage = (page: number) => {
+    getPeopleListRequest({ variables: { page } });
+  }
+
   return {
     peopleList,
     count,
     loading,
     firstLetter,
     getPeopleListBySearch,
+    getPeopleListByPage,
   }
 }
 
