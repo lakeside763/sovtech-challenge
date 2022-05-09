@@ -1,4 +1,4 @@
-require('dotenv').config({ path: './.env.test.local' });
+require('dotenv').config({ path: './.env.local' });
 
 function globalSetup() {}
 

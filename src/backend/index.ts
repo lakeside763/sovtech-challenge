@@ -1,5 +1,4 @@
-import { app, port, server } from './server';
-
+import { app, port, server, shutdown } from './server';
 
 const startApolloServer = async () => {
   await server.start();
@@ -8,3 +7,12 @@ const startApolloServer = async () => {
 }
 
 startApolloServer();
+
+
+process.on('SIGINT', async () => {
+  await shutdown(server);
+});
+
+process.on('SIGTERM', async () => {
+  await shutdown(server);
+});

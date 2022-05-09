@@ -1,5 +1,5 @@
 import compression from 'compression';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import { ApolloServer } from 'apollo-server-express';
 import express from 'express';
 import { makeExecutableSchema } from '@graphql-tools/schema'
@@ -10,14 +10,14 @@ import datasources from './datasources';
 import { GraphQLError } from 'graphql';
 
 
-const cache = new RedisCache(config.redis);
+export const cache = new RedisCache(config.redis);
 export const app = express();
 export const { port } = config;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(compression());
-app.use(helmet());
+// app.use(helmet());
 
 export const server = new ApolloServer({
   schema: makeExecutableSchema({
@@ -38,6 +38,11 @@ export const server = new ApolloServer({
     swapi: new datasources.swapi(),
   })
 });
+
+export const shutdown = async (server: any) => {
+  server.close();
+  return process.exit();
+};
 
 
 
