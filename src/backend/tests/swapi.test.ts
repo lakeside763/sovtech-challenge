@@ -80,9 +80,10 @@ describe('swapi test', () => {
   });
 
   afterAll(async() => {
-    jest.resetAllMocks();
+    jest.restoreAllMocks();
     await cache.close();
-  })
+  });
+  
   test('should fetch the first set list of people without parameter', async () => {
     const { statusCode, body: { data: { getPeopleList } } } = await apolloClient({ query: getPeopleListQuery });
     expect(statusCode).toBe(200);
