@@ -2,8 +2,8 @@
 
 
 ### Project Setup
-The project has a src root which consist of backend and fronted app
-The Solution was developed with Graphql.
+The project has a src root which consist of backend and fronted app <br />
+The Solution was developed with Graphql.<br />
 Apollo Client at the frontend and Apollo Server at the backend.
 
 ### Backend Setup
