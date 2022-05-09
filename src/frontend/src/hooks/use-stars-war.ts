@@ -38,8 +38,10 @@ const GET_PEOPLE_LIST = gql`
 const useStarsWar = () => {
   const [peopleList, setPeopleList] = useState([]);
   const [count, setCount] = useState();
+  const [currentPage, setCurrentPage] = useState(1);
   const { loading, data } = useQuery(GET_PEOPLE_LIST);
   const [getPeopleListRequest, { data: dataByQueryString }] = useLazyQuery(GET_PEOPLE_LIST);
+  const listPerPage = 10;
 
   useEffect(() => {
     if (data) {
@@ -55,6 +57,7 @@ const useStarsWar = () => {
       const { getPeopleList: { count, people } } = dataByQueryString;
       setPeopleList(people);
       setCount(count);
+      setCurrentPage((currentPage) => count < listPerPage ? 1 : currentPage);
     }
   }, [dataByQueryString]);
 
@@ -67,12 +70,14 @@ const useStarsWar = () => {
 
   const getPeopleListByPage = (page: number) => {
     getPeopleListRequest({ variables: { page } });
+    setCurrentPage(page);
   }
 
   return {
     peopleList,
     count,
     loading,
+    currentPage,
     firstLetter,
     getPeopleListBySearch,
     getPeopleListByPage,

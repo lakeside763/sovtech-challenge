@@ -5,6 +5,7 @@ export const StarsWarContext = createContext({
   peopleList: [],
   count: 0,
   loading: false,
+  currentPage: 1,
   firstLetter: (text: string) => text,
   getPeopleListBySearch: (search: string) => search,
   getPeopleListByPage: (page: number) => page,
