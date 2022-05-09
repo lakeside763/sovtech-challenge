@@ -4,17 +4,17 @@ import { Link, useParams } from "react-router-dom";
 import './person-details.styles.scss'
 import avatar from '../../assets/avatar.png'
 import { gql, useQuery } from "@apollo/client";
-import { PERSON_ATTRIBUTE } from "../../hooks/use-stars-war";
+import { PERSON_FRAGMENT } from "../../hooks/use-stars-war";
 import { Loader } from "../people/people-list.component";
 
 
 const GET_PERSON_BY_ID = gql`
   query GetPersonById($id: Int!) {
     getPersonById(id: $id) {
-      ...personAttribute
+      ...personFields
     }
   }
-  ${PERSON_ATTRIBUTE}
+  ${PERSON_FRAGMENT}
 `;
 
 interface Person {

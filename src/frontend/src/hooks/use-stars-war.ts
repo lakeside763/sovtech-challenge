@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { gql, useLazyQuery, useQuery } from '@apollo/client';
 
-export const PERSON_ATTRIBUTE = gql`
-  fragment personAttribute on Person {
+export const PERSON_FRAGMENT = gql`
+  fragment personFields on Person {
     id
     name
     mass
@@ -28,11 +28,11 @@ const GET_PEOPLE_LIST = gql`
       previous
       next
       people {
-        ...personAttribute
+        ...personFields
       }
     }
   }
-  ${PERSON_ATTRIBUTE}
+  ${PERSON_FRAGMENT}
 `;
 
 const useStarsWar = () => {
